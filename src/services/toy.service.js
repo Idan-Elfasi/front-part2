@@ -15,6 +15,13 @@ const labels = [
   'Battery Powered',
 ]
 
+const branches={
+  Hadera:{lat:32.44192 ,lng: 34.9039},
+  Holon:{lat:32.0166666 ,lng:34.7666636},
+  KiryatShmona:{lat: 33.208,lng: 35.57},
+
+}
+
 
 export const toyService = {
   query,
@@ -25,6 +32,7 @@ export const toyService = {
   getDefaultFilter,
   getDefaultSort,
   getToyLabels,
+  getBranchs,
 }
 
 function query(filterBy = {}, sortBy, pageIdx) {
@@ -69,6 +77,10 @@ function getToyLabels() {
   return [...labels]
 }
 
+function getBranchs(){
+return {...branches}
+}
+
 function _getRandomLabels() {
   const labelsCopy = [...labels]
   const randomLabels = []
@@ -78,3 +90,20 @@ function _getRandomLabels() {
   }
   return randomLabels
 }
+
+// function inStockandLabelCounts(label){
+//   return   toyService.query(toyService.getDefaultFilter())
+//     .then(toys=>  toys.filter( toy=>toy.inStock&& toy.labels.includes(label )
+//     .then(filterdToys=>  {
+//         if (filterdToys !== undefined) {
+//           console.log('FilterdToys-len:', filterdToys.length);
+//            return filterdToys.length
+//           } else {
+//             console.log('No result returned.');
+//           }
+//     } )
+    
+// )) 
+// toy
+
+// }

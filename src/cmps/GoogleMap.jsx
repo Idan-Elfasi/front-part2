@@ -1,33 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleMapReact from 'google-map-react';
 
+import { toyService } from "../services/toy.service.js";
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+// const branches=toyService.getBranchs()
+// console.log(Object.keys(branches));
 
-export  function GoogleMap(){
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
-  };
+//   const markers =Object.keys(branches).map(place=>{
+//     console.log(place);
+//     const cmps  = ({ text }) => <div style={{ fontSize: '1.2em' }}>{text}</div>;
+// })
+// console.log(markers);
 
-  return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '100vh', width: '100%' }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyBG_Hopn0dLYULthWmHCko84gu_dJSlEUw'}}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
-      </GoogleMapReact>
-    </div>
-  );
+const AnyReactComponent = ({ text }) => <div style={{ fontSize: '1.2em' }}>{text}</div>;
+
+
+export function GoogleMap() {
+     const branchesMap=toyService.getBranchs()
+const places=Object.keys(branchesMap)
+const branchsCoords=Object.values(branchesMap)
+// console.log(branches);
+//     const  [branch,setBranch]=useState(branches[0])
+
+    const [coords, setCoords] = useState({ lat: 32.0853, lng: 34.7818 })
+    const zoom = 11
+    const API_KEY='AIzaSyCSCSk4gGRLeUhepzulys-d3UdMyNBuUUI'
+
+    function onHandaleClick({ lat, lng }) {
+        setCoords({ lat, lng })
+    }
+
+    return (
+        // Important! Always set the container height explicitly
+        <div style={{ height: '100vh', width: '100%' }}>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key:API_KEY }}
+                defaultCenter={coords}
+                defaultZoom={zoom}
+                onClick={onHandaleClick}
+            >
+
+                {
+                   branchsCoords.map(coorsBranch=>{
+                       <AnyReactComponent
+                         {...coorsBranch}
+                           text="🚩"
+                       />
+
+                   })
+
+                //    <AnyReactComponent
+                //    {...coorsBranch}
+                //      text="🚩"
+                //  />
+
+                }
+            </GoogleMapReact   >
+        </div>
+    );
 }
