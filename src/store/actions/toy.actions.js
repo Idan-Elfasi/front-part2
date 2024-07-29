@@ -9,6 +9,7 @@ import {
   SET_TOYS,
   TOY_UNDO,
   UPDATE_TOY,
+  // INSTOCK_LABEL_TOY,
 } from '../reducers/toy.reducer'
 import { store } from '../store'
 
@@ -73,3 +74,7 @@ export function setFilter(filterBy = toyService.getDefaultFilter()) {
 export function setSort(sortBy = toyService.getDefaultSort()) {
   store.dispatch({ type: SET_SORT_BY, sortBy: sortBy })
 }
+// export function setDataCount(labels){
+  //  store.dispatch({type:INSTOCK_LABEL_TOY,  dashBoardCounts: labels.map((label)=>toyService.inStockandLabelCounts(label) )  })
+//    store.dispatch({type:INSTOCK_LABEL_TOY,  dashBoardCounts: labels.map((label)=>toyService.inStockandLabelCounts(label) )  })
+// }

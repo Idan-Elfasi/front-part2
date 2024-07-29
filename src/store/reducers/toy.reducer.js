@@ -12,6 +12,8 @@ export const SET_ERROR = 'SET_ERROR'
 
 export const TOY_UNDO = 'TOY_UNDO'
 
+// export const INSTOCK_LABEL_TOY='INSTOCK_LABEL_TOY'
+
 const initialState = {
   toys: [],
   filterBy: toyService.getDefaultFilter(),
@@ -21,6 +23,7 @@ const initialState = {
     isLoading: false,
     error: null,
   },
+  // dashBoardCounts: [],
 }
 
 export function toyReducer(state = initialState, action = {}) {
@@ -58,6 +61,9 @@ export function toyReducer(state = initialState, action = {}) {
 
     case SET_ERROR:
       return { ...state, flag: { ...state.flag, error: action.error } }
+
+    // case INSTOCK_LABEL_TOY:
+    //   return{...state, dashBoardCounts : action.dashBoardCounts}
 
     default:
       return state
